@@ -2,7 +2,7 @@
 
 var Printer = require('../');
 
-var printer = new Printer('escpos', 'file', '/dev/usb/lp1');
+var printer = new Printer('escpos', 'file', '/dev/usb/lp0');
 
 printer.open().then(function () {
 
