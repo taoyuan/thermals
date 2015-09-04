@@ -14,11 +14,9 @@ describe('printer', function () {
     device.removeCallback();
   });
 
-  it('should setup', function (done) {
+  it('should setup', function () {
     var printer = new Printer('escpos', 'file', device.name);
-    printer.open().then(function () {
-      printer.close(done);
-    });
+    t.ok(printer)
   });
 
   it('should write', function () {
@@ -29,8 +27,6 @@ describe('printer', function () {
 
   it.only('should print', function (done) {
     var printer = new Printer('escpos', 'file', device.name);
-    printer.open(function () {
-      printer.write('hello, 你好').print(done);
-    });
+    printer.write('hello, 你好').print(done);
   });
 });
