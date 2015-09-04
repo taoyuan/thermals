@@ -1,0 +1,46 @@
+{
+  "name": "thermals",
+  "version": "0.0.0",
+  "description": "The node thermal printer library compatible with Epson and Star thermal printers",
+  "homepage": "https://github.com/taoyuan/thermals",
+  "repository": "taoyuan/thermals",
+  "author": {
+    "name": "Tao Yuan",
+    "email": "towyuan@outlook.com",
+    "url": ""
+  },
+  "main": "lib/printer.js",
+  "keywords": [
+    "thermal",
+    "printer",
+    "epson",
+    "star",
+    "esc",
+    "pos"
+  ],
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "gulp": "^3.6.0",
+    "gulp-coveralls": "^0.1.0",
+    "gulp-eslint": "^0.15.0",
+    "gulp-exclude-gitignore": "^1.0.0",
+    "gulp-istanbul": "^0.9.0",
+    "gulp-mocha": "^2.0.0",
+    "gulp-nsp": "^0.4.5",
+    "gulp-plumber": "^1.0.0",
+    "mocha": "^2.3.0"
+  },
+  "scripts": {
+    "prepublish": "gulp prepublish",
+    "test": "gulp"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^2.9.34",
+    "debug": "^2.2.0",
+    "fs-jetpack": "^0.7.0",
+    "iconv-lite": "^0.4.11",
+    "stream-buffers": "^2.2.0",
+    "tmp": "0.0.27"
+  }
+}
