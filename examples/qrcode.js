@@ -4,6 +4,6 @@ var Printer = require('../');
 
 var printer = new Printer('escpos', 'file', '/dev/usb/lp0');
 
-printer.write('Hello, 你好').print(function () {
+printer.qrCode('Hello').print(function () {
   console.log('Write OK!');
 });
