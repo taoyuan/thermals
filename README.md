@@ -1,5 +1,5 @@
 # thermals [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
-> The node thermal print library compatible with Epson and Star thermal printers
+> The node thermal printer library compatible with Epson and Star thermal printers
 
 
 ## Install
