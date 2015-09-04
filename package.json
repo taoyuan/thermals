@@ -36,9 +36,11 @@
   "license": "MIT",
   "dependencies": {
     "bluebird": "^2.9.34",
+    "dank-do-while": "^0.1.2",
     "debug": "^2.2.0",
     "fs-jetpack": "^0.7.0",
     "iconv-lite": "^0.4.11",
+    "lodash": "^3.10.1",
     "stream-buffers": "^2.2.0",
     "tmp": "0.0.27"
   }
