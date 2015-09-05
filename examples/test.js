@@ -1,4 +1,4 @@
 'use strict';
 
-var a = String.fromCharCode(128);
+var a = String.fromCharCode(0);
 console.log(a);
