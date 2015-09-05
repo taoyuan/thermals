@@ -25,7 +25,7 @@ describe('printer', function () {
     console.log(printer.stream.getContents());
   });
 
-  it.only('should print', function (done) {
+  it('should print', function (done) {
     var printer = new Printer('escpos', 'file', device.name);
     printer.write('hello, 你好').print(done);
   });

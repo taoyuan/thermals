@@ -2,9 +2,9 @@
 
 var Printer = require('../');
 
-var printer = new Printer('escpos', 'file', '/dev/usb/lp0');
+var printer = new Printer();
 
-var str = 'Hello';
+var str = '1234567890';
 
 printer
   .barcode(str)
