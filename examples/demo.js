@@ -2,7 +2,8 @@
 
 var Printer = require('../');
 
-var printer = new Printer('file:///dev/usb/lp0');
+//var printer = new Printer('file:///dev/usb/lp0');
+var printer = new Printer();
 
 /* Initialize */
 //printer.initialize();
@@ -138,23 +139,20 @@ function demo_barcodes() {
   printer.feed(8);
   printer.cut();
 }
+
 ///* Graphics - this demo will not work on some non-Epson printers */
-//try {
-//  $logo = new EscposImage("resources/escpos-php.png");
-//  $imgModes = array(
-//    Escpos::IMG_DEFAULT,
-//    Escpos::IMG_DOUBLE_WIDTH,
-//    Escpos::IMG_DOUBLE_HEIGHT,
-//    Escpos::IMG_DOUBLE_WIDTH | Escpos::IMG_DOUBLE_HEIGHT
-//);
-//  foreach($imgModes as $mode) {
-//    printer.graphics($logo, $mode);
-//  }
-//} catch(Exception $e) {
-//  /* Images not supported on your PHP, or image file not found */
-//  printer.text($e -> getMessage() . "\n");
-//}
-//printer.cut();
+function demo_graphics() {
+  return Printer.image("./resources/thermals.png").then(function (img) {
+    ['default', 'double-width', 'double-height', 'double'].forEach(function (size) {
+      printer.graphics(img, size);
+    });
+    //printer.feed(8);
+    //printer.cut();
+  }).catch(function (err) {
+    console.error(err.stack);
+  });
+}
+
 //
 ///* Bit image */
 //try {
@@ -187,8 +185,9 @@ function demo_barcodes() {
 //}
 //printer.cut();
 
-
-
+function print() {
+  return printer.print();
+}
 
 //demo_font_modes();
 //demo_underline();
@@ -197,9 +196,11 @@ function demo_barcodes() {
 //demo_double_strike();
 //demo_fonts();
 //demo_align();
-demo_barcodes();
+//demo_barcodes();
 
 /* Pulse */
 //printer.pulse();
 
-printer.print();
+demo_graphics()
+  .then(print);
+
