@@ -143,7 +143,7 @@ function demo_barcodes() {
 ///* Graphics - this demo will not work on some non-Epson printers */
 function demo_graphics() {
   return Printer.image("./resources/sample.png").then(function (img) {
-    ['default', 'double-width', 'double-height', 'double'].forEach(function (size) {
+    ['default'/*, 'double-width', 'double-height', 'double'*/].forEach(function (size) {
       printer.graphics(img, size);
     });
     //printer.feed(8);
