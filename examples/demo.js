@@ -2,106 +2,142 @@
 
 var Printer = require('../');
 
-var printer = new Printer();
+var printer = new Printer('file:///dev/usb/lp0');
 
 /* Initialize */
 //printer.initialize();
 
 /* Text */
-printer.text("Hello world\n");
-printer.cut();
+function demo_simple() {
+  printer.text("Hello world\n");
+  //printer.feed(8);
+//printer.cut();
+}
+
 
 ///* Line feeds */
-//printer.text("ABC");
-//printer.feed(7);
-//printer.text("DEF");
-//printer.feedReverse(3);
-//printer.text("GHI");
-//printer.feed();
+function demo_line_feeds() {
+  printer.text("ABC");
+  printer.feed(7);
+  printer.text("DEF");
+//printer.feedReverse(3); // SP-POS88V not support
+  printer.text("GHI");
+  printer.feed();
+  //printer.feed(8);
 //printer.cut();
-//
+}
+
+
 ///* Font modes */
-//$modes = array(
-//  Escpos::MODE_FONT_B,
-//  Escpos::MODE_EMPHASIZED,
-//  Escpos::MODE_DOUBLE_HEIGHT,
-//  Escpos::MODE_DOUBLE_WIDTH,
-//  Escpos::MODE_UNDERLINE);
-//for($i = 0; $i < pow(2, count($modes)); $i++) {
-//  $bits = str_pad(decbin($i), count($modes), "0", STR_PAD_LEFT);
-//  $mode = 0;
-//  for($j = 0; $j < strlen($bits); $j++) {
-//    if(substr($bits, $j, 1) == "1") {
-//      $mode |= $modes[$j];
-//    }
-//  }
-//  printer.selectPrintMode($mode);
-//  printer.text("ABCDEFGHIJabcdefghijk\n");
-//}
-//printer.selectPrintMode(); // Reset
+function demo_font_modes() {
+  var modes = [
+    'FONT-B',
+    'EMPHASIZED',
+    'DOUBLE-HEIGHT',
+    'DOUBLE-WIDTH',
+    'UNDERLINE'
+  ];
+  for (var i = 0; i < modes.length; i++) {
+    //var bits = str_pad(decbin($i), modes.length, "0", STR_PAD_LEFT);
+    //var mode = 0;
+    //for (var j = 0; j < bits.length; j++) {
+    //  if (bits[j] == "1") {
+    //    mode |= modes[j];
+    //  }
+    //}
+    var mode = modes[i];
+    printer.selectPrintMode(mode);
+    printer.text(mode + ':');
+    printer.text("ABCDEFGHIJabcdefghijk\n");
+  }
+  printer.selectPrintMode(); // Reset
 //printer.cut();
-//
-///* Underline */
-//for($i = 0; $i < 3; $i++) {
-//  printer.setUnderline($i);
-//  printer.text("The quick brown fox jumps over the lazy dog\n");
-//}
-//printer.setUnderline(0); // Reset
-//printer.cut();
-//
+}
+/* Underline */
+function demo_underline() {
+  var underlines = [
+    'none', 'single', 'double'
+  ];
+  underlines.forEach(function (u) {
+    printer.setUnderline(u);
+    printer.text("The quick brown fox jumps over the lazy dog\n");
+  });
+
+  underlines.forEach(function (u) {
+    printer.setUnderline(u);
+    printer.text("中文：青天有月来几时？我今停杯一问之。\n");
+  });
+
+  printer.setUnderline(false); // Reset
+  printer.feed(8);
+  printer.cut();
+}
+
 ///* Cuts */
-//printer.text("Partial cut\n(not available on all printers)\n");
-//printer.cut(Escpos::CUT_PARTIAL);
-//printer.text("Full cut\n");
-//printer.cut(Escpos::CUT_FULL);
-//
+function demo_cut() {
+  printer.text("Partial cut\n(not available on all printers)\n");
+  printer.feed(8);
+  printer.cut('partial');
+  printer.text("Full cut\n");
+  printer.feed(8);
+  printer.cut('full');
+}
+
 ///* Emphasis */
-//for($i = 0; $i < 2; $i++) {
-//  printer.setEmphasis($i == 1);
-//  printer.text("The quick brown fox jumps over the lazy dog\n");
-//}
-//printer.setEmphasis(false); // Reset
-//printer.cut();
-//
+function demo_emphasis() {
+  [true, false].forEach(function (on) {
+    printer.setEmphasis(on);
+    printer.text("The quick brown fox jumps over the lazy dog\n");
+  });
+
+  printer.setEmphasis(false); // Reset
+  //printer.feed(8);
+  //printer.cut();
+}
+
 ///* Double-strike (looks basically the same as emphasis) */
-//for($i = 0; $i < 2; $i++) {
-//  printer.setDoubleStrike($i == 1);
-//  printer.text("The quick brown fox jumps over the lazy dog\n");
-//}
-//printer.setDoubleStrike(false);
-//printer.cut();
-//
+function demo_double_strike() {
+  [true, false].forEach(function (on) {
+    printer.setDoubleStrike(on);
+    printer.text("The quick brown fox jumps over the lazy dog\n");
+  });
+  printer.setDoubleStrike(false);
+  //printer.feed(8);
+  //printer.cut();
+}
+
 ///* Fonts (many printers do not have a 'Font C') */
-//$fonts = array(
-//  Escpos::FONT_A,
-//  Escpos::FONT_B,
-//  Escpos::FONT_C);
-//for($i = 0; $i < count($fonts); $i++) {
-//  printer.setFont($fonts[$i]);
-//  printer.text("The quick brown fox jumps over the lazy dog\n");
-//}
-//printer.setFont(); // Reset
-//printer.cut();
-//
-///* Justification */
-//$justification = array(
-//  Escpos::JUSTIFY_LEFT,
-//  Escpos::JUSTIFY_CENTER,
-//  Escpos::JUSTIFY_RIGHT);
-//for($i = 0; $i < count($justification); $i++) {
-//  printer.setJustification($justification[$i]);
-//  printer.text("A man a plan a canal panama\n");
-//}
-//printer.setJustification(); // Reset
-//printer.cut();
-//
+function demo_fonts() {
+  ['font-a', 'font-b', 'font-c'].forEach(function (font) {
+    printer.setFont(font);
+    printer.text("The quick brown fox jumps over the lazy dog\n");
+  });
+  printer.setFont(); // Reset
+  //printer.feed(8);
+  //printer.cut();
+}
+
+///* Alignment */
+function demo_align() {
+  ['left', 'center', 'right'].forEach(function (alignment) {
+    printer.setAlign(alignment);
+    printer.text("A man a plan a canal panama\n");
+  });
+  printer.setAlign(); // Reset
+
+  //printer.feed(8);
+  //printer.cut();
+
+}
+
 ///* Barcodes - see barcode.php for more detail */
-//printer.setBarcodeHeight(80);
-//$printer->setBarcodeTextPosition ( Escpos::BARCODE_TEXT_BELOW );
-//printer.barcode("9876");
-//printer.feed();
-//printer.cut();
-//
+function demo_barcodes() {
+  printer.setBarcodeHeight(80);
+  printer.setBarcodeTextPosition('bottom');
+  printer.barcode("9876");
+  printer.feed(8);
+  printer.cut();
+}
 ///* Graphics - this demo will not work on some non-Epson printers */
 //try {
 //  $logo = new EscposImage("resources/escpos-php.png");
@@ -150,6 +186,18 @@ printer.cut();
 //  printer.feed();
 //}
 //printer.cut();
+
+
+
+
+//demo_font_modes();
+//demo_underline();
+//demo_cut();
+//demo_emphasis();
+//demo_double_strike();
+//demo_fonts();
+//demo_align();
+demo_barcodes();
 
 /* Pulse */
 //printer.pulse();
