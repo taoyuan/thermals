@@ -43,6 +43,7 @@
     "get-pixels": "^3.2.2",
     "iconv-lite": "^0.4.11",
     "lodash": "^3.10.1",
+    "pad": "^0.1.0",
     "qs": "^5.0.0",
     "stream-buffers": "taoyuan/node-stream-buffer",
     "tmp": "0.0.27",
