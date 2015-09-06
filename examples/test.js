@@ -1,4 +1,5 @@
 'use strict';
 
-var a = String.fromCharCode(0);
-console.log(a);
+var Printer = require('../');
+
+console.log(Buffer.byteLength('中国', 'gbk'));
