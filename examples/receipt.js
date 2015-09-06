@@ -14,8 +14,8 @@ var items = [
   new Item("A final item", "4.45")
 ];
 var subtotal = new Item('Subtotal', '12.95');
-var tax = new Item('A local tax', '1.30');
-var total = new Item('Total', '14.25', true);
+var tax = new Item('A local tax', '-1.30');
+var total = new Item('Total', '11.65', true);
 /* Date is kept the same for testing */
 // $date = date('l jS \of F Y h:i:s A');
 var date = "Monday 6th of April 2015 02:56:25 PM";
