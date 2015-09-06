@@ -173,17 +173,13 @@ function demo_graphics() {
 //printer.cut();
 //
 ///* QR Code - see also the more in-depth demo at qr-code.php */
-//$testStr = "Testing 123";
-//$models = array(
-//  Escpos::QR_MODEL_1 => "QR Model 1",
-//  Escpos::QR_MODEL_2 => "QR Model 2 (default)",
-//  Escpos::QR_MICRO => "Micro QR code\n(not supported on all printers)");
-//foreach($models as $model => $name) {
-//  printer.qrCode($testStr, Escpos::QR_ECLEVEL_L, 3, $model);
-//  printer.text("$name\n");
-//  printer.feed();
-//}
-//printer.cut();
+function demo_qr() {
+  var str = "Testing 123";
+  printer.qr(str);
+  //printer.feed(8);
+  //printer.cut();
+}
+
 
 function print() {
   return printer.print();
@@ -197,10 +193,13 @@ function print() {
 //demo_fonts();
 //demo_align();
 //demo_barcodes();
+demo_qr();
 
 /* Pulse */
 //printer.pulse();
 
-demo_graphics()
-  .then(print);
+//demo_graphics()
+//  .then(print);
+
+print();
 

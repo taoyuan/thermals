@@ -7,6 +7,6 @@ var printer = new Printer();
 var str = 'Hello';
 
 printer
-  .qrCode(str)
+  .qr(str)
   .feed()
   .print();
