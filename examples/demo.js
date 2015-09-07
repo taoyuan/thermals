@@ -155,23 +155,17 @@ function demo_graphics() {
 
 //
 ///* Bit image */
-//try {
-//  $logo = new EscposImage("resources/escpos-php.png");
-//  $imgModes = array(
-//    Escpos::IMG_DEFAULT,
-//    Escpos::IMG_DOUBLE_WIDTH,
-//    Escpos::IMG_DOUBLE_HEIGHT,
-//    Escpos::IMG_DOUBLE_WIDTH | Escpos::IMG_DOUBLE_HEIGHT
-//);
-//  foreach($imgModes as $mode) {
-//    printer.bitImage($logo, $mode);
-//  }
-//} catch(Exception $e) {
-//  /* Images not supported on your PHP, or image file not found */
-//  printer.text($e -> getMessage() . "\n");
-//}
-//printer.cut();
-//
+function demo_bitimage() {
+
+  return Printer.image("./resources/sample.png").then(function (img) {
+    printer.bitImage(img);
+    //printer.feed(8);
+    //printer.cut();
+  }).catch(function (err) {
+    console.error(err.stack);
+  });
+
+}
 ///* QR Code - see also the more in-depth demo at qr-code.php */
 function demo_qr() {
   var str = "Testing 123";
@@ -193,7 +187,7 @@ function print() {
 //demo_fonts();
 //demo_align();
 //demo_barcodes();
-demo_qr();
+//demo_qr();
 
 /* Pulse */
 //printer.pulse();
@@ -201,5 +195,8 @@ demo_qr();
 //demo_graphics()
 //  .then(print);
 
-print();
+demo_bitimage()
+  .then(print);
+
+//print();
 

@@ -2,4 +2,4 @@
 
 var Printer = require('../');
 
-console.log(Buffer.byteLength('中国', 'gbk'));
+console.log(String.fromCharCode('0x2a'));
