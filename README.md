@@ -1,4 +1,7 @@
 # thermals [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/taoyuan/thermals.svg)](https://greenkeeper.io/)
+
 > The node thermal printer library compatible with Epson and Star thermal printers
 
 
